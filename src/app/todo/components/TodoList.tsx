@@ -8,7 +8,7 @@ const TodoList = ({ todos }: { todos: TodoType[] }) => {
     <div>
       <ul>
         {todos.map((todo) => (
-          <Todo todo={todo} />
+          <Todo key={todo.id} todo={todo} />
         ))}
       </ul>
     </div>

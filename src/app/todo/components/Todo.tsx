@@ -1,35 +1,17 @@
-"use client";
-import { deleteTodo, editTodo } from "@/app/api";
 import { Todo } from "@/app/types";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useTodoEdit } from "../hook/hook";
 
 const Todo = ({ todo }: { todo: Todo }) => {
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [input, setInput] = useState<string>(todo.name);
+  const {
+    handleChange,
+    handleEdit,
+    handleSave,
+    handleDelete,
+    isEditing,
+    input,
+    ref,
+  } = useTodoEdit(todo);
 
-  const ref = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    // 編集中の時に自動でinputにフォーカスを当てる
-    if (isEditing) {
-      ref.current?.focus();
-    }
-  }, [isEditing]);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
-
-  const handleEdit = async () => {
-    setIsEditing(true);
-  };
-  const handleSave = async () => {
-    await editTodo(todo.id, input);
-    setIsEditing(false);
-  };
-
-  const handleDelete = async () => {
-    await deleteTodo(todo.id);
-  };
   return (
     <div
       key={todo.id}
