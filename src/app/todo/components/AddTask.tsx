@@ -1,28 +1,23 @@
 "use client";
-import React, { ChangeEvent, SetStateAction, useState } from "react";
+import { addTodo } from "@/app/api";
+import { Todo } from "@/app/types";
+import React, { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Todo } from "../page";
 
-const AddTask = ({
-  todos,
-  setTodos,
-}: {
-  todos: Todo[];
-  setTodos: (value: SetStateAction<Todo[]>) => void;
-}) => {
+const AddTask = ({ todos }: { todos: Todo[] }) => {
   const [input, setInput] = useState<string>("");
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const handleClick = () => {
-    if (!input) return;
-    setTodos([...todos, { id: uuidv4(), name: input, isEditing: false }]);
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    await addTodo({ id: uuidv4(), name: input, isEditing: false });
     setInput("");
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <label className="block">
         <input
           type="text"
@@ -31,13 +26,10 @@ const AddTask = ({
           onChange={(e) => handleChange(e)}
         />
       </label>
-      <button
-        className="w-full rounded-md px-3 py-2 my-3 text-white bg-sky-500  hover:bg-sky-700 hover:scale-95 duration-200  "
-        onClick={handleClick}
-      >
+      <button className="w-full rounded-md px-3 py-2 my-3 text-white bg-sky-500  hover:bg-sky-700 hover:scale-95 duration-200  ">
         Add Task
       </button>
-    </div>
+    </form>
   );
 };
 
