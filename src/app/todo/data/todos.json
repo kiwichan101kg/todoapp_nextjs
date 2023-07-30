@@ -1,0 +1,24 @@
+{
+  "tasks": [
+    {
+      "id": "fa4717d7-1a95-43c8-9d2d-53844ef5464f",
+      "name": "こんにちは",
+      "isEditing": false
+    },
+    {
+      "id": "ee366b6b-8ba8-420a-9c2d-5769fc47b761",
+      "name": "どうも",
+      "isEditing": false
+    },
+    {
+      "id": "43a43e01-b799-4039-ae98-e57a6828b599",
+      "name": "こんにちは",
+      "isEditing": false
+    },
+    {
+      "id": "bdbe1168-188e-419c-8abd-d6b83acb5afc",
+      "name": "あああ",
+      "isEditing": false
+    }
+  ]
+}
